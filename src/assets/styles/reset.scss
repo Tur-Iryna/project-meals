@@ -1,0 +1,75 @@
+@import './variebles.scss';
+
+* {
+  box-sizing: border-box;;
+}
+
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+body{
+  font-size: 16px;
+
+  font-family: "Merriweather", sans-serif;
+  font-weight: 400;
+  color: $text;
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.title{
+  margin: 40px 0 20px;
+  font-size: 25px;
+  font-weight: 500;
+  text-align: center;
+text-transform: uppercase;
+}
+
+
+ul{
+  list-style: none;
+}
+
+
+.wrapper{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+
+}
+
+
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+
+

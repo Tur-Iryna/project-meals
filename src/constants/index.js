@@ -1,0 +1,1 @@
+export const INGREDIENT_IMG = 'https://www.themealdb.com/images/ingredients/'

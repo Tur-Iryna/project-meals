@@ -97,17 +97,7 @@ onMounted(() => {
   gap: 70px;
   justify-content: center;
   position: relative;
-  &::after {
-    content: "";
-    background-image: url("../assets/images/bg.png");
-    background-repeat: no-repeat;
-    height: 877px;
-    width: 249px;
-    position: absolute;
-    right: 0;
-    top: 500px;
-    z-index: -1;
-  }
+
   &__item {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
@@ -144,6 +134,7 @@ onMounted(() => {
     position: absolute;
     right: 0;
     top: 20px;
+    z-index: -1;
   }
 }
 

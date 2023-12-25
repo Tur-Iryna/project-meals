@@ -116,6 +116,7 @@ watch(route, () => {
     position: absolute;
     right: 0;
     top: 130px;
+    z-index: -1;
   }
   .title {
     margin-top: 0;

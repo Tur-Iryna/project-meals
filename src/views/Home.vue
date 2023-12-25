@@ -17,7 +17,7 @@ const meals = ref([]);
 onMounted(async () => {
   for (let i = 0; i < 10; i++) {
     axiosClient
-      .get(`random.php`)
+      .get(`random.php?${Math.random()}`)
       .then(({ data }) => meals.value.push(data.meals[0]));
   }
 });

@@ -3,6 +3,7 @@ import HomePage from '@/views/HomePage.vue'
 import CategoriesListPage from '@/views/CategoriesListPage.vue'
 import DetailsInfoPage from '@/views/DetailsInfoPage.vue'
 import SearchResultPage from '@/views/SearchResultPage.vue'
+import ErrorPage from '@/views/ErrorPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,7 +27,12 @@ const router = createRouter({
 		path: '/search-results',
 		name: 'search',
 		component: SearchResultPage
-	  }
+	  },
+	  {
+		path: '/:pathMatch(.*)*',
+		name: 'error',
+		component: ErrorPage
+	  },
   ]
 })
 

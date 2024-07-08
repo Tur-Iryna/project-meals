@@ -1,5 +1,5 @@
 <template>
-	<div class="categories">
+	<div class="categories" id="categories">
 		<div class="container">
 			<h3 class="categories__title title">Categories</h3>
 			<div class="categories__inner">
@@ -45,6 +45,7 @@ export default {
 		selectCategory(item) {
 			const nameCategory = item.strCategory;
 			this.getItemsListByCategory(nameCategory);
+			localStorage.setItem("categoryMeals", nameCategory);
 		},
 	},
 };
@@ -56,7 +57,7 @@ export default {
 	background-image: url("../../assets/images/bg.png");
 	background-repeat: no-repeat;
 	background-position: bottom right;
-	background-position-y: 118%;
+	background-position-y: 114%;
 	&__title {
 		width: 70px;
 	}
@@ -68,9 +69,10 @@ export default {
 		column-gap: 130px;
 	}
 	&__item {
-		width: 300px;
+		max-width: 300px;
 		padding: 20px 40px;
-		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+		box-shadow: rgba(35, 68, 16, 0.2) 0px 7px 29px 0px;
+		border-radius: 30px;
 		cursor: pointer;
 		transition: all 0.3s;
 		&:hover {
@@ -85,6 +87,90 @@ export default {
 	&__img {
 		width: 100%;
 		margin: 0 auto;
+	}
+}
+
+@media (max-width: 1160px) {
+	.categories {
+		&__items {
+			grid-template-columns: repeat(2, 280px);
+			column-gap: 65px;
+			justify-content: center;
+		}
+	}
+}
+
+@media (max-width: 1040px) {
+	.categories {
+		background-position-y: 131%;
+	}
+}
+
+@media (max-width: 950px) {
+	.random-meals {
+		&__item {
+			display: block !important;
+		}
+		&__info {
+			max-width: 100%;
+		}
+	}
+}
+
+@media (max-width: 700px) {
+	.categories {
+		padding-bottom: 70px;
+		&__items {
+			grid-template-columns: repeat(1, 1fr);
+			column-gap: 65px;
+			justify-items: center;
+		}
+		&__item {
+			max-width: 370px;
+		}
+	}
+	.random-meals {
+		&__img {
+			max-width: 100%;
+		}
+		&__info {
+			width: 100%;
+		}
+	}
+}
+
+@media (max-width: 550px) {
+	.categories {
+		padding: 30px 0 70px;
+		&__items {
+			grid-template-columns: repeat(1, 1fr);
+			column-gap: 65px;
+			justify-items: center;
+		}
+		&__item {
+			max-width: 370px;
+		}
+	}
+	.random-meals {
+		&__img {
+			max-width: 100%;
+		}
+		&__info {
+			width: 100%;
+		}
+	}
+}
+
+@media (max-width: 400px) {
+	.random-meals {
+		&__info {
+			width: 100%;
+		}
+	}
+	.categories {
+		&__item:hover {
+			transform: none;
+		}
 	}
 }
 </style>

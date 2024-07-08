@@ -6,17 +6,21 @@
 			</h2>
 			<div class="ingredient__inner">
 				<BaseMealsList
-					:ingredientsList="ingredientsList"
+					v-if="ingredientsList"
+					:mealsList="ingredientsList"
 					@searchMeals="searchMeals"
 				/>
+				<div v-else class="details-info__loading">
+					Not found meals...Try again
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import { useGetIngredientsList } from "@/store/getIngredientsList";
 import BaseMealsList from "@/components/global/BaseMealsList.vue";
+import { useGetIngredientList } from "@/store/getIngredientList";
 import { mapActions, mapState } from "pinia";
 
 export default {
@@ -24,18 +28,33 @@ export default {
 		BaseMealsList,
 	},
 	computed: {
-		...mapState(useGetIngredientsList, ["ingredientsList"]),
+		...mapState(useGetIngredientList, ["ingredientsList"]),
 		searchQuery() {
 			return this.$route.query.q || "";
 		},
 	},
 	methods: {
-		...mapActions(useGetIngredientsList, ["getIngredientsItemsList"]),
-		searchMeals(searchQuery) {
-			this.getIngredientsItemsList(searchQuery);
+		...mapActions(useGetIngredientList, ["getIngredientsItemsList"]),
+		searchMeals() {
+			this.getIngredientsItemsList(this.searchQuery);
+		},
+	},
+
+	watch: {
+		searchQuery: {
+			immediate: true,
+			handler(newQuery) {
+				if (newQuery) {
+					this.searchMeals();
+				}
+			},
 		},
 	},
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.ingredients {
+	margin-top: 60px;
+}
+</style>

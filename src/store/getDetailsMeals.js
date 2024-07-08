@@ -1,4 +1,5 @@
 import {defineStore} from 'pinia';
+import DetailsMealsApi from '@/api/detailsMeals';
 
 export const useGetDetailsByMeals = defineStore('getDetailsByMeals',{
 	state:()=>({
@@ -7,14 +8,13 @@ export const useGetDetailsByMeals = defineStore('getDetailsByMeals',{
 	actions:{
 		async getDetailsInfoMeals(idMeals){
 			try{
-				const response = await fetch (`${import.meta.env.VITE_BASE_URL}/lookup.php?i=${idMeals}`)
-				const data = await response.json();
+				const params = {i : idMeals};
+                const data = await DetailsMealsApi.getDetailsInfoMeals(params)
 				this.mealsInfo = data.meals;
-				console.log('meals', data)
                 return data;
 			}catch(error){
             console.log(error)
 			}
-		}
+		},
 	}
-})
+});

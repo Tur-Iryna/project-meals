@@ -1,19 +1,19 @@
 import { defineStore } from "pinia";
+import IngredientListApi from "@/api/ingredientList";
 
-export const useGetIngredientsList = defineStore('getIngredientsList',{
+export const useGetIngredientList = defineStore('getIngredientList',{
 	state:()=>({
 		ingredientsList : [],
 	}),
 	actions:{
 		async getIngredientsItemsList(ingredient){
 			try{
-				const response = await fetch(`${import.meta.env.VITE_BASE_URL}/filter.php?i=${ingredient}`)
-				const data = await response.json();
-				console.log(data)
+				const params = {i : ingredient}
+				const data = await IngredientListApi.getIngredientList(params)
 				this.ingredientsList = data.meals;
 			}catch(error){
                 console.log(error)
 			}
 		   }
 	}
-})
+});

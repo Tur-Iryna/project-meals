@@ -11,6 +11,7 @@
 						params: { mealsId: item.idMeal },
 					}"
 					@click="selectMeals(item.idMeal)"
+					@searchMeals="searchMeals"
 				>
 					<img
 						:src="item.strMealThumb"
@@ -21,11 +22,13 @@
 				</router-link>
 			</div>
 		</div>
+		<div class="details-info__loading" v-if="!mealsList">Loading...</div>
 	</div>
 </template>
 
 <script>
 import { useGetSelectCategory } from "@/store/getSelectCategory";
+import { useGetIngredientList } from "@/store/getIngredientList";
 import { useGetDetailsByMeals } from "@/store/getDetailsMeals";
 import { mapState, mapActions } from "pinia";
 
@@ -38,6 +41,7 @@ export default {
 	},
 	computed: {
 		...mapState(useGetSelectCategory, ["itemsCategoryList", "category"]),
+		...mapState(useGetIngredientList, ["ingredientList"]),
 		...mapState(useGetDetailsByMeals, ["mealsInfo"]),
 		itemsMealsList() {
 			return this.mealsList;
@@ -45,8 +49,12 @@ export default {
 	},
 	methods: {
 		...mapActions(useGetDetailsByMeals, ["getDetailsInfoMeals"]),
+		...mapActions(useGetIngredientList, ["getIngredientsItemsList"]),
 		selectMeals(mealsId) {
 			this.$emit("selectMeals", mealsId);
+		},
+		searchMeals(searchQuery) {
+			this.getIngredientsItemsList(searchQuery);
 		},
 	},
 };
@@ -54,6 +62,7 @@ export default {
 
 <style lang="scss">
 .base-list {
+	padding: 50px 0;
 	&__content {
 		display: grid;
 		grid-template-columns: repeat(4, 260px);
@@ -65,14 +74,56 @@ export default {
 		margin-bottom: 15px;
 		width: 260px;
 	}
+	&__item {
+		border-radius: 30px;
+		box-shadow: rgba(68, 102, 58, 0.4) 0px 0px 0px 2px,
+			rgba(61, 139, 71, 0.65) 0px 4px 6px -1px,
+			rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+		padding: 15px;
+	}
 	&__name {
 		font-size: 27px;
 		line-height: 28px;
+		font-family: "Medium";
 	}
 	&__title {
 		font-size: 20px;
 		text-align: center;
 		color: $black-color;
+	}
+}
+
+@media (max-width: 1240px) {
+	.base-list {
+		&__content {
+			display: grid;
+			grid-template-columns: repeat(3, 260px);
+			column-gap: 120px;
+		}
+	}
+}
+
+@media (max-width: 1075px) {
+	.base-list {
+		&__content {
+			column-gap: 70px;
+		}
+	}
+}
+
+@media (max-width: 960px) {
+	.base-list {
+		&__content {
+			grid-template-columns: repeat(2, 280px);
+		}
+	}
+}
+
+@media (max-width: 670px) {
+	.base-list {
+		&__content {
+			grid-template-columns: repeat(1, 280px);
+		}
 	}
 }
 </style>

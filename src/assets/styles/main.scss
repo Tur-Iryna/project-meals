@@ -1,6 +1,10 @@
 @import './reset.scss';
 @import './fonts.scss';
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	font-family: 'Regular';
 	font-size: 18px;
@@ -17,7 +21,7 @@ body {
 .title {
 	padding-bottom: 10px;
 	letter-spacing: 0.8px;
-	font-size: 23px;
+	font-size: 25px;
 	margin-bottom: 40px;
 	position: relative;
 

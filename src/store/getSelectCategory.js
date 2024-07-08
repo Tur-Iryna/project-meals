@@ -1,4 +1,5 @@
 import {defineStore} from 'pinia';
+import SelectCategoryApi from '@/api/selectCategory';
 
 export const useGetSelectCategory = defineStore('getSelectCategory',{
 	state:()=>({
@@ -9,8 +10,8 @@ export const useGetSelectCategory = defineStore('getSelectCategory',{
 		async getItemsListByCategory (category){
 			try{
 				this.category = category;
-				const response = await fetch(`${import.meta.env.VITE_BASE_URL}/filter.php?c=${category}`)
-				const data = await response.json();
+				const params = { c: category };
+				const data = await SelectCategoryApi.getSelectCategory(params)
 				this.itemsCategoryList = data.meals;
 				return data;
 			}catch(error){

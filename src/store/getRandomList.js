@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import RandomListApi from "@/api/randomList";
 
 export const useGetRandomList = defineStore('getRandomList', {
   state: () => ({
@@ -7,8 +8,7 @@ export const useGetRandomList = defineStore('getRandomList', {
   actions: {
     async getRandomMeals() {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/random.php`);
-        const data = await response.json();
+        const data = await RandomListApi.getRandomList();
         this.randomMealsList = data.meals;
 		return data;
       } catch (error) {

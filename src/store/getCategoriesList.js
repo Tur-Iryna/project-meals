@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import CategoriesApi from '@/api/categories';
 
 export const useGetCategories = defineStore('getCategories',{
 	state: ()=>({
@@ -9,11 +10,7 @@ export const useGetCategories = defineStore('getCategories',{
 		async getCategoriesList(){
 			try{
 				this.loading = true;
-				const response = await fetch(`${import.meta.env.VITE_BASE_URL}/categories.php`)
-				if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-				const data = await response.json();
+				const data = await CategoriesApi.getCategoriesData()
 				this.categoriesList = data.categories;
 			}catch(error){
 				console.log('Error', error)

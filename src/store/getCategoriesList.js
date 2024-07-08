@@ -19,4 +19,4 @@ export const useGetCategories = defineStore('getCategories',{
 			}
 		}
 	}
-})
+});

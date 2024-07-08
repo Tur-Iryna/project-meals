@@ -4,10 +4,13 @@
 			<h2 class="categories-list__name title">
 				Category: {{ category }}
 			</h2>
-			<BaseMealsList
-				:mealsList="itemsCategoryList"
-				@selectMeals="selectMeals"
-			/>
+			<div v-if="!loading" class="categories-list__items">
+				<BaseMealsList
+					:mealsList="itemsCategoryList"
+					@selectMeals="selectMeals"
+				/>
+			</div>
+			<div v-else class="categories-loading">Loading...</div>
 		</div>
 	</div>
 </template>
@@ -32,7 +35,11 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(useGetSelectCategory, ["itemsCategoryList", "category"]),
+		...mapState(useGetSelectCategory, [
+			"itemsCategoryList",
+			"category",
+			"loading",
+		]),
 		...mapState(useGetDetailsByMeals, ["mealsInfo"]),
 	},
 	methods: {

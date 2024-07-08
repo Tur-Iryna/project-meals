@@ -1,5 +1,5 @@
 <template>
-	<div class="search-inner">
+	<div class="search-inner" v-click-outside="toggleDropdown">
 		<div class="search-inner__box">
 			<input
 				v-model="searchQuery"
@@ -75,6 +75,9 @@ export default {
 							.includes(this.searchQuery.toLowerCase())
 				);
 			}
+		},
+		toggleDropdown() {
+			this.filteredIngredients = [];
 		},
 	},
 	watch: {
@@ -156,6 +159,12 @@ export default {
 			width: 100%;
 		}
 	}
+	.autocomplete-list {
+		width: 260px;
+		&__item {
+			font-size: 14px;
+		}
+	}
 }
 
 @media (max-width: 450px) {
@@ -167,6 +176,9 @@ export default {
 		&-inner__btn {
 			width: 45px;
 		}
+	}
+	.autocomplete-list {
+		width: 200px;
 	}
 }
 </style>

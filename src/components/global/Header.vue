@@ -28,6 +28,7 @@
 						<li class="nav-menu__item">
 							<router-link
 								:to="{ name: 'home', hash: '#banner' }"
+								@click="closeMenu"
 								class="nav-menu__link"
 								>Home</router-link
 							>
@@ -77,6 +78,8 @@ export default {
 		},
 		closeMenu() {
 			this.btnMenuActive = false;
+			this.activeMenu = !this.activeMenu;
+			document.body.style.overflow = "";
 		},
 		scrollPosition() {
 			this.scrolled = window.scrollY > 0;
@@ -98,6 +101,7 @@ export default {
 				}, 100);
 				this.$router.push({ name: "home", hash: section });
 			}
+			this.closeMenu();
 		},
 	},
 	created() {

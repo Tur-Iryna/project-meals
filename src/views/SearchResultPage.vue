@@ -4,7 +4,7 @@
 			<h2 class="ingredients__title title">
 				Search Results for "{{ searchQuery }}"
 			</h2>
-			<div class="ingredient__inner">
+			<div v-if="!loading" class="ingredient__inner">
 				<BaseMealsList
 					v-if="ingredientsList"
 					:mealsList="ingredientsList"
@@ -14,6 +14,7 @@
 					Not found meals...Try again
 				</div>
 			</div>
+			<div v-else class="ingredients-loading">Loading...</div>
 		</div>
 	</div>
 </template>
@@ -28,7 +29,7 @@ export default {
 		BaseMealsList,
 	},
 	computed: {
-		...mapState(useGetIngredientList, ["ingredientsList"]),
+		...mapState(useGetIngredientList, ["ingredientsList", "loading"]),
 		searchQuery() {
 			return this.$route.query.q || "";
 		},
@@ -56,5 +57,12 @@ export default {
 <style lang="scss">
 .ingredients {
 	margin-top: 60px;
+	&-loading {
+		text-align: center;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
 }
 </style>

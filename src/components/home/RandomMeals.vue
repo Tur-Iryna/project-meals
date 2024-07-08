@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="random-meals__inner">
 				<h2 class="random-meals__title title">Random meals</h2>
-				<div class="random-meals__items">
+				<div v-if="!loading" class="random-meals__items">
 					<div
 						v-for="item in randomMealsList"
 						:key="item.id"
@@ -32,6 +32,7 @@
 						</div>
 					</div>
 				</div>
+				<div v-else class="random-meals__loading">Loading...</div>
 			</div>
 		</div>
 	</div>
@@ -53,7 +54,7 @@ export default {
 		this.infoText = this.randomMealsList.strInstructions;
 	},
 	computed: {
-		...mapState(useGetRandomList, ["randomMealsList"]),
+		...mapState(useGetRandomList, ["randomMealsList", "loading"]),
 	},
 	methods: {
 		...mapActions(useGetRandomList, ["getRandomMeals"]),
@@ -126,6 +127,29 @@ export default {
 			box-shadow: 0px 15px 20px rgba(142, 151, 147, 0.4);
 			color: #fff;
 			transform: translateY(-7px);
+		}
+	}
+	&__loading {
+		text-align: center;
+	}
+}
+
+@media (max-width: 500px) {
+	.random-meals {
+		padding-bottom: 30px;
+		&__name {
+			font-size: 25px;
+			line-height: 32px;
+			text-align: center;
+		}
+		&__category {
+			display: block;
+			text-align: center;
+			font-size: 17px;
+		}
+		&__btn {
+			font-size: 14px;
+			padding: 15px 19px;
 		}
 	}
 }

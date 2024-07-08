@@ -3,7 +3,7 @@
 		<div class="container">
 			<h3 class="categories__title title">Categories</h3>
 			<div class="categories__inner">
-				<div class="categories__items">
+				<div v-if="!loading" class="categories__items">
 					<router-link
 						v-for="item in categoriesList"
 						:key="item.idCategory"
@@ -22,6 +22,7 @@
 						/>
 					</router-link>
 				</div>
+				<div v-else class="categories-loading">Loading...</div>
 			</div>
 		</div>
 	</div>
@@ -37,7 +38,7 @@ export default {
 		await this.getCategoriesList();
 	},
 	computed: {
-		...mapState(useGetCategories, ["categoriesList"]),
+		...mapState(useGetCategories, ["categoriesList", "loading"]),
 	},
 	methods: {
 		...mapActions(useGetCategories, ["getCategoriesList"]),
@@ -87,6 +88,9 @@ export default {
 	&__img {
 		width: 100%;
 		margin: 0 auto;
+	}
+	&-loading {
+		text-align: center;
 	}
 }
 
@@ -149,6 +153,9 @@ export default {
 		}
 		&__item {
 			max-width: 370px;
+			&:hover {
+				transform: none;
+			}
 		}
 	}
 	.random-meals {
@@ -165,11 +172,6 @@ export default {
 	.random-meals {
 		&__info {
 			width: 100%;
-		}
-	}
-	.categories {
-		&__item:hover {
-			transform: none;
 		}
 	}
 }

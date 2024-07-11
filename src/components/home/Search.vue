@@ -8,6 +8,13 @@
 				class="search-inner__input"
 				placeholder="Enter name of ingredient"
 			/>
+			<button v-if="searchQuery" @click="clearSearch" class="clear-btn">
+				<img
+					class="search-inner__img"
+					src="@/assets/images/icons/close.svg"
+					alt=""
+				/>
+			</button>
 			<ul v-if="filteredIngredients.length" class="autocomplete-list">
 				<li
 					v-for="option in filteredIngredients"
@@ -81,6 +88,9 @@ export default {
 		toggleDropdown() {
 			this.filteredIngredients = [];
 		},
+		clearSearch() {
+			this.searchQuery = "";
+		},
 	},
 	watch: {
 		ingredientsList() {
@@ -107,6 +117,7 @@ export default {
 		border-radius: 20px;
 		padding: 10px 0 10px 20px;
 		outline: none;
+		position: relative;
 		&::placeholder {
 			font-family: "Regular";
 		}
@@ -130,6 +141,14 @@ export default {
 	}
 }
 
+.clear-btn {
+	background-color: transparent;
+	border: none;
+	position: absolute;
+	right: 52px;
+	top: 11px;
+	cursor: pointer;
+}
 .autocomplete-list {
 	position: absolute;
 	top: 43px;

@@ -67,12 +67,15 @@ body.dark-theme {
 		}
 	}
 
-	.autocomplete-list__item {
+	.autocomplete-list {
 		background-color: $green-color;
 
-		&:hover {
-			background-color: #f0f0f0;
+		&__item {
+			&:hover {
+				background-color: $hover-search;
+			}
 		}
+
 	}
 
 }

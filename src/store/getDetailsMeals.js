@@ -20,7 +20,6 @@ export const useGetDetailsByMeals = defineStore('getDetailsByMeals',{
 				}else{
 					this.videoUrl = '';
 				}
-				console.log(this.videoUrl)
                 return data;
 			}catch(error){
             console.log('Error', error);

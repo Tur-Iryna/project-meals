@@ -45,11 +45,13 @@ export default {
 		...mapActions(useGetIngredientList, ["getIngredientsItemsList"]),
 		...mapActions(useGetDetailsByMeals, ["getDetailsInfoMeals"]),
 		searchMeal(searchQuery) {
-			this.$emit("searchMeals", searchQuery);
-			this.$router.push({
-				path: "/search-results",
-				query: { q: this.searchQuery },
-			});
+			if (searchQuery) {
+				this.$emit("searchMeals", searchQuery);
+				this.$router.push({
+					path: "/search-results",
+					query: { q: this.searchQuery },
+				});
+			}
 		},
 		async onInput() {
 			await this.getIngredientsItemsList(this.searchQuery);

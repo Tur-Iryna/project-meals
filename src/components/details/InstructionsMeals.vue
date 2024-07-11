@@ -6,9 +6,12 @@
 		<p class="details-instructions__descr">
 			{{ mealInfo.strInstructions }}
 		</p>
-		<div class="details-instructions__video">
-			<iframe :src="videoUrl" class="details-instructions__frame">
-			</iframe>
+		<div v-if="videoUrl" class="details-instructions__info">
+			<h3 class="details-instructions__title">Watch Video</h3>
+			<div class="details-instructions__video">
+				<iframe :src="videoUrl" class="details-instructions__frame">
+				</iframe>
+			</div>
 		</div>
 	</div>
 </template>
@@ -47,22 +50,26 @@ export default {
 	}
 	&__descr {
 		text-align: justify;
-		margin-bottom: 30px;
+		margin-bottom: 40px;
 	}
 	&__video {
 		position: relative;
 		padding-bottom: 39.47%;
 		height: 0;
 		overflow: hidden;
-		max-width: 760px;
+		max-width: 660px;
 		margin: 0 auto;
+	}
+	&__title {
+		font-size: 25px;
+		margin-bottom: 30px;
 	}
 	&__frame {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 100%;
+		height: 350px;
 		border: 0;
 	}
 }
@@ -75,5 +82,13 @@ export default {
 	position: absolute;
 	left: 0;
 	top: -9px;
+}
+
+@media (max-width: 750px) {
+	.details-instructions {
+		&__frame {
+			height: 100%;
+		}
+	}
 }
 </style>

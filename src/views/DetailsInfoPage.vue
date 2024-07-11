@@ -41,6 +41,7 @@ export default {
 		if (mealsId) {
 			await this.getDetailsInfoMeals(mealsId);
 		}
+		window.scrollTo({ top: 0, behavior: "smooth" });
 	},
 };
 </script>
@@ -55,5 +56,4 @@ export default {
 		text-align: center;
 	}
 }
-
 </style>

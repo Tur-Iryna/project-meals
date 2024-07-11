@@ -90,6 +90,7 @@ export default {
 		},
 		clearSearch() {
 			this.searchQuery = "";
+			this.filteredIngredients = [];
 		},
 	},
 	watch: {
@@ -146,7 +147,7 @@ export default {
 	border: none;
 	position: absolute;
 	right: 52px;
-	top: 11px;
+	top: 12px;
 	cursor: pointer;
 }
 .autocomplete-list {

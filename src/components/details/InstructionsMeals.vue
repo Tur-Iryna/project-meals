@@ -14,6 +14,9 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "pinia";
+import { useGetDetailsByMeals } from "@/store/getDetailsMeals";
+
 export default {
 	props: {
 		mealInfo: {
@@ -22,14 +25,13 @@ export default {
 		},
 	},
 	computed: {
-		videoUrl() {
-			if (this.mealInfo.strYoutube) {
-				const videoId = this.mealInfo.strYoutube.split("v=")[1];
-				const urlVideo = `https://www.youtube.com/embed/${videoId}`;
-				return urlVideo;
-			}
-			return null;
-		},
+		...mapState(useGetDetailsByMeals, ["videoUrl"]),
+	},
+	methods: {
+		...mapActions(useGetDetailsByMeals, [
+			"getDetailsInfoMeals",
+			"getIngredientsImg",
+		]),
 	},
 };
 </script>

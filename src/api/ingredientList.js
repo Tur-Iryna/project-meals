@@ -6,7 +6,7 @@ class IngredientListApi extends ApiBase{
 		super();
 		this.resource = 'filter.php'
 	}
-
+	
 	async getIngredientList(params) {
 		const url = `${ApiBase.baseApiUrl()}/${this.resource}`;
 		try {

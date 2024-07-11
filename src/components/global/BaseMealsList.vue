@@ -2,15 +2,10 @@
 	<div class="base-list">
 		<div class="container">
 			<div class="base-list__content">
-				<router-link
+				<div
 					v-for="item in itemsMealsList"
 					:key="item.strCategory"
 					class="base-list__item"
-					:to="{
-						name: 'details',
-						params: { mealsId: item.idMeal },
-					}"
-					@click="selectMeals(item.idMeal)"
 					@searchMeals="searchMeals"
 				>
 					<img
@@ -19,7 +14,13 @@
 						class="base-list__img"
 					/>
 					<h2 class="base-list__title">{{ item.strMeal }}</h2>
-				</router-link>
+					<button
+						@click="selectMeals(item.idMeal)"
+						class="base-list__btn"
+					>
+						Show recipe
+					</button>
+				</div>
 			</div>
 		</div>
 		<div class="details-info__loading" v-if="!mealsList">Loading...</div>
@@ -52,6 +53,10 @@ export default {
 		...mapActions(useGetIngredientList, ["getIngredientsItemsList"]),
 		selectMeals(mealsId) {
 			this.$emit("selectMeals", mealsId);
+			this.$router.push({
+				name: "details",
+				params: { mealsId: mealsId },
+			});
 		},
 		searchMeals(searchQuery) {
 			this.getIngredientsItemsList(searchQuery);
@@ -65,7 +70,7 @@ export default {
 	padding: 50px 0;
 	&__content {
 		display: grid;
-		grid-template-columns: repeat(4, 260px);
+		grid-template-columns: repeat(4, 280px);
 		justify-content: center;
 		row-gap: 70px;
 		column-gap: 50px;
@@ -79,7 +84,8 @@ export default {
 		box-shadow: rgba(68, 102, 58, 0.4) 0px 0px 0px 2px,
 			rgba(61, 139, 71, 0.65) 0px 4px 6px -1px,
 			rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-		padding: 15px;
+		padding: 20px;
+		background-color: $white-color;
 	}
 	&__name {
 		font-size: 27px;
@@ -87,9 +93,35 @@ export default {
 		font-family: "Medium";
 	}
 	&__title {
-		font-size: 20px;
+		font-size: 18px;
+		height: 60px;
 		text-align: center;
 		color: $black-color;
+		margin-bottom: 10px;
+	}
+	&__btn {
+		display: flex;
+		align-items: center;
+		font-family: "Medium";
+		padding: 10px 15px;
+		color: white;
+		margin: 0 auto;
+		background: linear-gradient(
+			0deg,
+			rgb(97, 161, 107) 0%,
+			rgb(132, 221, 136) 100%
+		);
+		border: none;
+		box-shadow: 20px 15px -15px #54a36b98;
+		letter-spacing: 1px;
+		border-radius: 20px;
+		cursor: pointer;
+		user-select: none;
+		touch-action: manipulation;
+		transition: all 0.3s;
+		&:hover {
+			transform: translateY(-2px);
+		}
 	}
 }
 

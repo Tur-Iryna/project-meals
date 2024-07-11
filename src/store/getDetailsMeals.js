@@ -15,7 +15,7 @@ export const useGetDetailsByMeals = defineStore('getDetailsByMeals',{
 				this.mealsInfo = data.meals;
                 return data;
 			}catch(error){
-            console.log(error)
+            console.log('Error', error);
 			}finally{
 				this.loading = false;
 			}

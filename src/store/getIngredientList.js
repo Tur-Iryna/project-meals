@@ -14,7 +14,7 @@ export const useGetIngredientList = defineStore('getIngredientList',{
 				const data = await IngredientListApi.getIngredientList(params)
 				this.ingredientsList = data.meals;
 			}catch(error){
-                console.log(error)
+                console.log('Error', error);
 			}finally{
 				this.loading = false;
 			}

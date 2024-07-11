@@ -6,7 +6,7 @@ class CategoriesApi extends ApiBase{
 		super()
 		this.resource = 'categories.php'
 	}
-
+	
 	async getCategoriesData(params) {
 		const url = `${ApiBase.baseApiUrl()}/${this.resource}`;
 		try {

@@ -22,7 +22,7 @@
 				<img src="../../assets/images/icons/search.svg" alt="" />
 			</button>
 		</div>
-		<p class="search-inner__text">What are you favorite cuisines?</p>
+		<p class="search-inner__text">What are you favourite meals?</p>
 	</div>
 </template>
 
@@ -158,9 +158,12 @@ export default {
 		&-inner__box {
 			width: 100%;
 		}
+		&-inner__text {
+			margin-left: 0;
+		}
 	}
 	.autocomplete-list {
-		width: 260px;
+		width: 224px;
 		&__item {
 			font-size: 14px;
 		}
@@ -175,6 +178,9 @@ export default {
 		}
 		&-inner__btn {
 			width: 45px;
+		}
+		&-inner__input {
+			font-size: 16px;
 		}
 	}
 	.autocomplete-list {

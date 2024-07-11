@@ -12,23 +12,17 @@
 					</router-link>
 				</div>
 				<nav class="nav-menu">
-					<button @click="toggleMenu" class="menu-btn">
-						<img
-							v-if="!btnMenuActive"
-							src="@/assets/images/icons/menu.svg"
-							alt=""
-						/>
-						<img
-							v-else
-							src="@/assets/images/icons/close.svg"
-							alt=""
-						/>
+					<button
+						@click="toggleMenu"
+						:class="['menu-btn', { active: btnMenuActive }]"
+					>
+						<span v-if="!btnMenuActive"></span>
 					</button>
 					<ul class="nav-menu__list" :class="{ active: activeMenu }">
 						<li class="nav-menu__item">
 							<router-link
 								:to="{ name: 'home', hash: '#banner' }"
-								@click="closeMenu"
+								@click="scrollToSection('#banner')"
 								class="nav-menu__link"
 								>Home</router-link
 							>
@@ -50,6 +44,7 @@
 							>
 						</li>
 					</ul>
+					<ToggleButton />
 				</nav>
 			</div>
 		</div>
@@ -57,13 +52,17 @@
 </template>
 
 <script>
+import ToggleButton from "./ToggleButton.vue";
+
 export default {
+	components: {
+		ToggleButton,
+	},
 	data() {
 		return {
 			btnMenuActive: false,
 			activeMenu: false,
 			scrolled: false,
-			activeLink: null,
 		};
 	},
 	methods: {
@@ -71,15 +70,15 @@ export default {
 			this.activeMenu = !this.activeMenu;
 			this.btnMenuActive = !this.btnMenuActive;
 			if (this.activeMenu) {
-				document.body.style.overflow = "hidden";
+				document.body.style.overflowY = "hidden";
 			} else {
-				document.body.style.overflow = "";
+				document.body.style.overflowY = "";
 			}
 		},
 		closeMenu() {
 			this.btnMenuActive = false;
 			this.activeMenu = !this.activeMenu;
-			document.body.style.overflow = "";
+			document.body.style.overflowY = "";
 		},
 		scrollPosition() {
 			this.scrolled = window.scrollY > 0;
@@ -87,34 +86,42 @@ export default {
 				this.scrolled = false;
 			}
 		},
-		scrollToSection(selector, section) {
-			const element = document.querySelector(selector);
-			if (element) {
-				element.scrollIntoView({ behavior: "smooth" });
-			}
-			if (section) {
-				setTimeout(() => {
-					const element = document.querySelector(section);
+		scrollToSection(section) {
+			this.$router.push({ name: "home", hash: section }).then(() => {
+				this.$nextTick(() => {
+					setTimeout(() => {
+						const element = document.querySelector(section);
+						if (element) {
+							element.scrollIntoView({ behavior: "smooth" });
+						}
+						this.closeMenu();
+					}, 300);
+				});
+			});
+		},
+		handleRouteChange(to) {
+			const hash = to.hash;
+			if (hash) {
+				this.$nextTick(() => {
+					const element = document.querySelector(hash);
 					if (element) {
 						element.scrollIntoView({ behavior: "smooth" });
 					}
-				}, 100);
-				this.$router.push({ name: "home", hash: section });
+				});
 			}
-			this.closeMenu();
 		},
 	},
 	created() {
 		window.addEventListener("scroll", this.scrollPosition);
 	},
 	mounted() {
-		const hash = this.$route.hash;
-		if (hash) {
-			const element = document.querySelector(hash);
-			if (element) {
-				element.scrollIntoView({ behavior: "smooth" });
-			}
-		}
+		this.handleRouteChange(this.$route);
+		this.$router.afterEach((to, from) => {
+			this.handleRouteChange(to);
+		});
+	},
+	destroyed() {
+		window.removeEventListener("scroll", this.scrollPosition);
 	},
 };
 </script>
@@ -134,9 +141,12 @@ export default {
 }
 
 .nav-menu {
+	display: flex;
+	align-items: center;
+	gap: 30px;
 	&__list {
 		display: flex;
-		gap: 60px;
+		gap: 40px;
 	}
 	&__link {
 		color: $black-color;
@@ -149,29 +159,73 @@ export default {
 }
 
 .menu-btn {
+	width: 25px;
+	color: $black-color;
+	background-color: transparent;
+	padding: 10px 0;
+	border: none;
+	position: relative;
 	display: none;
-}
+	cursor: pointer;
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background-color: $black-color;
+	}
+	&::before {
+		top: 0;
+	}
 
-.nav-menu__list.active {
-	display: block;
-	top: 65px;
-	transition: all 0.3s;
+	&::after {
+		bottom: 0;
+	}
+
+	& span {
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background-color: $black-color;
+		transform: translateY(-50%);
+		transition: opacity 0.3s ease;
+	}
+	&.active::before {
+		transform: translateY(8px) rotate(45deg);
+	}
+	&.active::after {
+		transform: translateY(-10px) rotate(-45deg);
+	}
+	&.active span {
+		opacity: 0;
+	}
 }
 
 @media (max-width: 550px) {
 	.nav-menu {
+		flex-direction: row-reverse;
 		&__list {
-			border-radius: 10px;
-			position: absolute;
+			position: fixed;
 			top: -900px;
 			left: 0px;
 			width: 100%;
 			background-color: $white-color;
 			padding: 90px 20px 30px;
 			z-index: 90;
-			transition: top 0.3s ease;
 			height: 100vh;
 			text-align: center;
+			transform: translateY(-100%);
+		}
+		&__list.active {
+			transform: translateY(0);
+			display: block;
+			top: 65px;
+			transition: transform 0.3s ease;
 		}
 		&__item {
 			padding-bottom: 30px;
@@ -182,6 +236,7 @@ export default {
 		background-color: transparent;
 		border: none;
 		cursor: pointer;
+		transition: transform 0.3s ease;
 	}
 }
 </style>

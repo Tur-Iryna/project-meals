@@ -153,4 +153,13 @@ export default {
 		}
 	}
 }
+
+@media (max-width: 450px) {
+	.random-meals {
+		&__btn {
+			display: block;
+			text-align: center;
+		}
+	}
+}
 </style>

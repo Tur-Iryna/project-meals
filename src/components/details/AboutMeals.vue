@@ -36,13 +36,13 @@ export default {
 	);
 	display: flex;
 	align-items: center;
-	gap: 80px;
+	gap: 140px;
 	margin-bottom: 40px;
 	&__image {
 		width: 500px;
 	}
 	&__name {
-		font-size: 40px;
+		font-size: 48px;
 		line-height: 42px;
 		margin-bottom: 20px;
 	}

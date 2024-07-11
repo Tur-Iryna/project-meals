@@ -57,45 +57,33 @@ export default {
 	margin-bottom: 40px;
 	&__info {
 		display: grid;
-		grid-template-columns: repeat(2, 240px);
+		grid-template-columns: repeat(2, 280px);
 		margin-bottom: 30px;
 	}
 	&__ingredient {
 		font-family: "Roboto";
 		padding-bottom: 5px;
 		border-bottom: 1px solid $green-color;
-		padding: 10px;
+		padding: 10px 35px;
+		position: relative;
+		&::before {
+			content: "";
+			position: absolute;
+			background-image: url("../../assets/images/icons/check.svg");
+			width: 24px;
+			height: 24px;
+			left: 0;
+		}
 	}
 	&__subtitle {
 		font-size: 25px;
 		margin-bottom: 30px;
-		padding-left: 30px;
 		position: relative;
 		margin-bottom: 20px;
 	}
 }
 
-.title-ingredients::before {
-	content: "";
-	background-image: url("@/assets/images/icons/meal.svg");
-	width: 20px;
-	height: 20px;
-	position: absolute;
-	left: 0;
-	top: 4px;
-}
-
-.title-measures::before {
-	content: "";
-	background-image: url("@/assets/images/icons/spoon.svg");
-	width: 20px;
-	height: 20px;
-	position: absolute;
-	left: 0;
-	top: 5px;
-}
-
-@media (max-width: 550px) {
+@media (max-width: 650px) {
 	.details-ingredients {
 		margin-bottom: 5px;
 		&__info {

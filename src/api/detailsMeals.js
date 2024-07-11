@@ -6,7 +6,7 @@ class DetailsMealsApi extends ApiBase{
 		super()
 		this.resource = 'lookup.php'
 	}
-
+	
 	async getDetailsInfoMeals(params) {
 		const url = `${ApiBase.baseApiUrl()}/${this.resource}`;
 		try {

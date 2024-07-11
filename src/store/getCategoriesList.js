@@ -13,7 +13,7 @@ export const useGetCategories = defineStore('getCategories',{
 				const data = await CategoriesApi.getCategoriesData()
 				this.categoriesList = data.categories;
 			}catch(error){
-				console.log('Error', error)
+				console.log('Error', error);
 			}finally{
 				this.loading = false;
 			}

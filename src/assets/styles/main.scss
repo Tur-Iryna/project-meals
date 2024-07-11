@@ -34,3 +34,36 @@ body {
 		width: 70px;
 	}
 }
+
+body.dark-theme {
+	background-color: $dark-bg-color;
+	color: #ffffff;
+
+	.nav-menu__link {
+		color: $white-color;
+
+		&:hover {
+			color: $green-color;
+		}
+	}
+
+	.nav-menu__list.active {
+		background-color: $dark-bg-color;
+	}
+
+	.menu-btn {
+		color: $white-color;
+		background-color: transparent;
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			background-color: $white-color;
+		}
+
+		& span {
+			background-color: $white-color;
+		}
+	}
+}

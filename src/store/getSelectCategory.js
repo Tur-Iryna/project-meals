@@ -17,10 +17,10 @@ export const useGetSelectCategory = defineStore('getSelectCategory',{
 				this.itemsCategoryList = data.meals;
 				return data;
 			}catch(error){
-            console.log('Error', error)
+                console.log('Error', error)
 			}finally{
 				this.loading = false;
 			}
 		}
 	}
-})
+});

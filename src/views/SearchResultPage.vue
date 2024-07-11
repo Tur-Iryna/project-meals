@@ -11,7 +11,7 @@
 					@searchMeals="searchMeals"
 				/>
 				<div v-else class="details-info__loading">
-					Not found meals...Try again
+					Not found meals...Please try again
 				</div>
 			</div>
 			<div v-else class="ingredients-loading">Loading...</div>

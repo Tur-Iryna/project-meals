@@ -72,8 +72,9 @@ export default {
 	&__item {
 		max-width: 300px;
 		padding: 20px 40px;
-		box-shadow: rgba(35, 68, 16, 0.2) 0px 7px 29px 0px;
+		box-shadow: rgba(153, 155, 153, 0.89) 0px 7px 15px 0px;
 		border-radius: 30px;
+		background-color: #cadfa1;
 		cursor: pointer;
 		transition: all 0.3s;
 		&:hover {

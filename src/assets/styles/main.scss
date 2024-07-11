@@ -66,4 +66,13 @@ body.dark-theme {
 			background-color: $white-color;
 		}
 	}
+
+	.autocomplete-list__item {
+		background-color: $green-color;
+
+		&:hover {
+			background-color: #f0f0f0;
+		}
+	}
+
 }

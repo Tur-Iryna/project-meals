@@ -111,6 +111,7 @@ export default {
 		border: none;
 		font-size: 18px;
 		padding: 15px 35px;
+		width: 130px;
 		font-family: "Semi-Bold";
 		text-decoration: none;
 		outline: none;
@@ -158,7 +159,7 @@ export default {
 	.random-meals {
 		&__btn {
 			display: block;
-			text-align: center;
+			margin: 0 auto;
 		}
 	}
 }

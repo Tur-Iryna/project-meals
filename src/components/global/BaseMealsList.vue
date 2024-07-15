@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import { useGetSelectCategory } from "@/store/getSelectCategory";
-import { useGetIngredientList } from "@/store/getIngredientList";
-import { useGetDetailsByMeals } from "@/store/getDetailsMeals";
+import { useGetSelectCategory } from "@/store/SelectCategoryStore";
+import { useGetIngredientList } from "@/store/IngredientListStore";
+import { useGetDetailsByMeals } from "@/store/MealDetailsStore";
 import { mapState, mapActions } from "pinia";
 
 export default {
@@ -70,7 +70,7 @@ export default {
 	padding: 50px 0;
 	&__content {
 		display: grid;
-		grid-template-columns: repeat(4, 280px);
+		grid-template-columns: repeat(4, 270px);
 		justify-content: center;
 		row-gap: 70px;
 		column-gap: 50px;
@@ -94,6 +94,7 @@ export default {
 	}
 	&__title {
 		font-size: 18px;
+		line-height: 23px;
 		height: 60px;
 		text-align: center;
 		color: $black-color;
@@ -103,6 +104,7 @@ export default {
 		display: flex;
 		align-items: center;
 		font-family: "Medium";
+		font-size: 14px;
 		padding: 10px 15px;
 		color: white;
 		margin: 0 auto;
@@ -155,6 +157,7 @@ export default {
 	.base-list {
 		&__content {
 			grid-template-columns: repeat(1, 280px);
+			row-gap: 40px;
 		}
 	}
 }

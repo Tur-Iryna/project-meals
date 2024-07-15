@@ -21,7 +21,7 @@
 
 <script>
 import BaseMealsList from "@/components/global/BaseMealsList.vue";
-import { useGetIngredientList } from "@/store/getIngredientList";
+import { useGetIngredientList } from "@/store/IngredientListStore";
 import { mapActions, mapState } from "pinia";
 
 export default {
@@ -40,7 +40,6 @@ export default {
 			this.getIngredientsItemsList(this.searchQuery);
 		},
 	},
-
 	watch: {
 		searchQuery: {
 			immediate: true,
@@ -66,3 +65,4 @@ export default {
 	}
 }
 </style>
+

@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { notify } from '@kyvg/vue3-notification'
-import { useGetSelectCategory } from '@/store/getSelectCategory'
-import { useGetDetailsByMeals } from '@/store/getDetailsMeals'
-import { useGetIngredientList } from "@/store/getIngredientList";
+import { useGetSelectCategory } from '@/store/SelectCategoryStore'
+import { useGetDetailsByMeals } from '@/store/MealDetailsStore'
+import { useGetIngredientList } from "@/store/IngredientListStore";
 
 export function http (method, url, params, header, isCustomError = false) {
 	method = method.toLowerCase()

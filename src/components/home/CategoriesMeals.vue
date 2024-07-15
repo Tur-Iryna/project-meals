@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import { useGetCategories } from "@/store/getCategoriesList";
-import { useGetSelectCategory } from "@/store/getSelectCategory";
+import { useGetCategories } from "@/store/CategoriesListStore";
+import { useGetSelectCategory } from "@/store/SelectCategoryStore";
 import { mapState, mapActions } from "pinia";
 
 export default {
@@ -59,9 +59,6 @@ export default {
 	background-repeat: no-repeat;
 	background-position: bottom right;
 	background-position-y: 114%;
-	&__title {
-		width: 70px;
-	}
 	&__items {
 		display: grid;
 		grid-template-columns: repeat(3, 280px);
@@ -177,3 +174,4 @@ export default {
 	}
 }
 </style>
+

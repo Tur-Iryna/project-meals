@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import { useGetSelectCategory } from "@/store/getSelectCategory";
-import { useGetCategories } from "@/store/getCategoriesList";
-import { useGetDetailsByMeals } from "@/store/getDetailsMeals";
+import { useGetSelectCategory } from "@/store/SelectCategoryStore";
+import { useGetCategories } from "@/store/CategoriesListStore";
+import { useGetDetailsByMeals } from "@/store/MealDetailsStore";
 import BaseMealsList from "@/components/global/BaseMealsList.vue";
 import { mapState, mapActions } from "pinia";
 
@@ -30,7 +30,7 @@ export default {
 		const nameCategoryLocal =
 			this.$route.params.nameCategory ||
 			localStorage.getItem("categoryMeals");
-		if (nameCategoryLocal) {
+		if (nameCategoryLocal && nameCategoryLocal !== this.category) {
 			await this.getItemsListByCategory(nameCategoryLocal);
 		}
 	},
@@ -59,3 +59,4 @@ export default {
 	margin-top: 50px;
 }
 </style>
+

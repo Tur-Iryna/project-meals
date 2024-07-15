@@ -3,7 +3,7 @@
 		<div class="search-inner__box">
 			<input
 				v-model="searchQuery"
-				@input="onInput"
+				@input="debouncedOnInput"
 				@keydown.enter="searchMeal(searchQuery)"
 				class="search-inner__input"
 				placeholder="Enter name of ingredient"
@@ -15,7 +15,10 @@
 					alt=""
 				/>
 			</button>
-			<ul v-if="filteredIngredients.length" class="autocomplete-list">
+			<ul
+				v-if="filteredIngredients.length && searchQuery"
+				class="autocomplete-list"
+			>
 				<li
 					v-for="option in filteredIngredients"
 					:key="option.idMeal"
@@ -34,9 +37,10 @@
 </template>
 
 <script>
-import { useGetIngredientList } from "@/store/getIngredientList";
-import { useGetDetailsByMeals } from "@/store/getDetailsMeals";
+import { useGetIngredientList } from "@/store/IngredientListStore";
+import { useGetDetailsByMeals } from "@/store/MealDetailsStore";
 import { mapActions, mapState } from "pinia";
+import { debounce } from "@/utils/debounce";
 
 export default {
 	data() {
@@ -47,6 +51,10 @@ export default {
 	},
 	computed: {
 		...mapState(useGetIngredientList, ["ingredientsList"]),
+	},
+	created() {
+		this.debouncedOnInput = debounce(this.onInput, 300);
+		console.log("debouncedOnInput created");
 	},
 	methods: {
 		...mapActions(useGetIngredientList, ["getIngredientsItemsList"]),
@@ -61,15 +69,16 @@ export default {
 			}
 		},
 		async onInput() {
-			await this.getIngredientsItemsList(this.searchQuery);
-			this.filterOptions();
+			if (this.searchQuery.length > 4) {
+				await this.getIngredientsItemsList(this.searchQuery);
+				this.filterOptions();
+			}
 		},
 		selectOption(option) {
 			const mealId = option.idMeal;
 			this.getIngredientsItemsList(mealId);
 			this.searchQuery = option.idMeal;
 			this.filteredIngredients = [];
-			this.getDetailsInfoMeals(this.searchQuery);
 			this.$router.push({
 				name: "details",
 				params: { mealsId: this.searchQuery },
@@ -83,6 +92,8 @@ export default {
 							.toLowerCase()
 							.includes(this.searchQuery.toLowerCase())
 				);
+			} else if (this.ingredientsList !== this.searchQuery) {
+				this.toggleDropdown();
 			}
 		},
 		toggleDropdown() {
@@ -90,7 +101,7 @@ export default {
 		},
 		clearSearch() {
 			this.searchQuery = "";
-			this.filteredIngredients = [];
+			this.toggleDropdown();
 		},
 	},
 	watch: {
@@ -115,6 +126,7 @@ export default {
 	&__input {
 		width: 100%;
 		height: 40px;
+		border: none;
 		border-radius: 20px;
 		padding: 10px 0 10px 20px;
 		outline: none;
@@ -158,7 +170,7 @@ export default {
 	background: white;
 	border: 1px solid #ccc;
 	border-top: none;
-	width: 335px;
+	width: 330px;
 	max-height: 150px;
 	overflow-y: auto;
 	margin: 0;

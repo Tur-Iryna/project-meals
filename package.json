@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@kyvg/vue3-notification": "^3.2.1",
+    "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
@@ -22,6 +23,7 @@
     "sass-loader": "^14.2.1",
     "vite": "^5.3.1",
     "vue-axios": "^3.5.2",
+    "vue-lazyload": "^3.0.0",
     "vue-scrollto": "^2.20.0"
   }
 }

@@ -19,7 +19,7 @@ import AboutMeals from "@/components/details/AboutMeals.vue";
 import IngredientsMeals from "@/components/details/IngredientsMeals.vue";
 import InstructionsMeals from "@/components/details/InstructionsMeals.vue";
 import { mapState, mapActions } from "pinia";
-import { useGetDetailsByMeals } from "@/store/getDetailsMeals";
+import { useGetDetailsByMeals } from "@/store/MealDetailsStore";
 
 export default {
 	components: {

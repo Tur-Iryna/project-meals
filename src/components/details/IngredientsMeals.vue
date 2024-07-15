@@ -19,7 +19,7 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
-import { useGetDetailsByMeals } from "@/store/getDetailsMeals";
+import { useGetDetailsByMeals } from "@/store/MealDetailsStore";
 
 export default {
 	computed: {
@@ -92,3 +92,4 @@ export default {
 	}
 }
 </style>
+

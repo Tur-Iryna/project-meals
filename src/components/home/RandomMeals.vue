@@ -39,9 +39,9 @@
 </template>
 
 <script>
-import { useGetRandomList } from "@/store/getRandomList";
+import { useGetRandomList } from "@/store/RandomListStore";
 import { mapState, mapActions } from "pinia";
-import { useGetDetailsByMeals } from "@/store/getDetailsMeals";
+import { useGetDetailsByMeals } from "@/store/MealDetailsStore";
 
 export default {
 	data() {
@@ -68,7 +68,6 @@ export default {
 		},
 		showDetailsMeals(idMeal) {
 			this.$router.push({ name: "details", params: { mealsId: idMeal } });
-			this.getDetailsInfoMeals(idMeal);
 		},
 	},
 };
@@ -110,8 +109,8 @@ export default {
 		background-color: $green-color;
 		border: none;
 		font-size: 18px;
-		padding: 15px 35px;
-		width: 130px;
+		padding: 15px 25px;
+		width: 160px;
 		font-family: "Semi-Bold";
 		text-decoration: none;
 		outline: none;
@@ -159,8 +158,10 @@ export default {
 	.random-meals {
 		&__btn {
 			display: block;
+			width: 130px;
 			margin: 0 auto;
 		}
 	}
 }
 </style>
+

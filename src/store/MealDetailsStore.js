@@ -16,7 +16,7 @@ export const useGetDetailsByMeals = defineStore('getDetailsByMeals',{
 				this.mealsInfo = data.meals;
 				if (data.meals[0].strYoutube) {
 					const videoId = data.meals[0].strYoutube.split("v=")[1];
-					this.videoUrl = `${import.meta.env.VITE_VIDEO_URL}/${videoId}`;
+					this.videoUrl = `${import.meta.env.VITE_BASE_VIDEO_URL}/${videoId}`;
 				}else{
 					this.videoUrl = '';
 				}

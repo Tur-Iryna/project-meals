@@ -8,8 +8,8 @@
 				{{ mealInfo.strMeal }}
 			</h3>
 			<div class="details-content__category">
-				<span>CATEGORY :</span>
-				{{ mealInfo.strCategory }}
+				<span>CATEGORY:</span>
+				<span>{{ mealInfo.strCategory }}</span>
 			</div>
 		</div>
 	</div>
@@ -76,7 +76,7 @@ export default {
 	.details-content {
 		display: block;
 		&__name {
-			font-size: 36px;
+			font-size: 33px;
 		}
 		&__image {
 			width: 100%;

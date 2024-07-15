@@ -54,7 +54,6 @@ export default {
 	},
 	created() {
 		this.debouncedOnInput = debounce(this.onInput, 300);
-		console.log("debouncedOnInput created");
 	},
 	methods: {
 		...mapActions(useGetIngredientList, ["getIngredientsItemsList"]),
